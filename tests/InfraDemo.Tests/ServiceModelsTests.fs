@@ -10,7 +10,7 @@ module ServiceModelsTests =
     module ServiceModelValidationTests = 
         [<Fact>]
         let ``Validate unique names (duplicates case)`` () =
-            let sm = ServiceModel.createModel [Service("foo"); Service("bar"); Service("foo")]
+            let sm = ServiceModel.createModel (List.map (ServiceName >> Service) ["foo";"bar";"foo"])
             let actual = ServiceModel.validate sm 
             let errors = 
                 actual 
@@ -26,7 +26,7 @@ module ServiceModelsTests =
 
         [<Fact>]
         let ``Validate unique names (all unique case)`` () =
-            let sm = ServiceModel.createModel [Service("foo"); Service("bar"); Service("baz")]
+            let sm = ServiceModel.createModel (List.map (ServiceName >> Service) ["foo";"bar";"baz"])
             let actual = ServiceModel.validate sm 
             let invalids = 
                 actual 

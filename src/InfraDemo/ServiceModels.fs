@@ -1,7 +1,9 @@
 namespace InfraDemo.ServiceModels
 
+type ServiceName = | ServiceName of string
 type Entity =
-| Service of name:string
+| Service of name:ServiceName
+
 
 /// A model of the application on the service-level
 type ServiceModel = | ServiceModel of Entity list
@@ -20,8 +22,8 @@ module ServiceModel =
             let ruleName = "Names must be unique"
             let nonUniques = 
                 entities 
-                |> List.countBy (function | Service name -> name) 
-                |> List.filter (fun (name, count) -> count>1)
+                |> List.countBy (function | Service (ServiceName name) -> name) 
+                |> List.filter (fun (_, count) -> count>1)
             match List.isEmpty nonUniques with
             | true -> Valid(ruleName)
             | false -> Invalid(ruleName, nonUniques |> List.map (fun (name, _) -> NonUniqueName name))
