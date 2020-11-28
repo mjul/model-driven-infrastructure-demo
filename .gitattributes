@@ -1,0 +1,6 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# F# files
+*.fs text
+*.fsproj text
