@@ -1,4 +1,4 @@
-namespace InfraDemo.ServiceModels
+namespace InfraDemo.Models.ServiceModels
 
 type ServiceName = | ServiceName of string
 type Entity =

@@ -1,11 +1,11 @@
-namespace InfraDemo.Tests
+namespace InfraDemoTests.Models.ServiceModels
 
 open System
 open Xunit
 
 module ServiceModelsTests = 
-    open InfraDemo.ServiceModels
-    open InfraDemo.ServiceModels.ServiceModel.Rules
+    open InfraDemo.Models.ServiceModels
+    open InfraDemo.Models.ServiceModels.ServiceModel.Rules
 
     module ServiceModelValidationTests = 
         [<Fact>]

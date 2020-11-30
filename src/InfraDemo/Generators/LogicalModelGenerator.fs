@@ -1,9 +1,9 @@
-namespace InfraDemo.Compilers
+namespace InfraDemo.Generators
 
 
-module ServiceModelCompiler = 
-    open InfraDemo.ServiceModels
-    open InfraDemo.LogicalModels
+module LogicalModelGenerator = 
+    open InfraDemo.Models.ServiceModels
+    open InfraDemo.Models.LogicalModels
 
     type Environment = 
     | Environment of queues:Queue list
@@ -35,10 +35,10 @@ module ServiceModelCompiler =
         match entity with 
         | Service sname ->
             let inboxName = NamingConventions.Queues.serviceInbox sname
-            let inbox = NormalQueue(NormalQueue.NormalQueue inboxName) 
+            let inbox =Queue.Queue inboxName
             let dlqName = NamingConventions.Queues.serviceDlq sname
-            let dlq = DeadLetterQueue(DeadLetterQueue.DeadLetterQueue(dlqName, inbox))
-            let outbox = NormalQueue(NormalQueue.NormalQueue (NamingConventions.Queues.serviceOutbox sname))
+            let dlq = Queue.Queue dlqName
+            let outbox = Queue.Queue(NamingConventions.Queues.serviceOutbox sname)
             let queues' =  queues @ [inbox;dlq;outbox] 
             Ok (Environment queues')
 

@@ -3,8 +3,8 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="ServiceModels.fs" />
-    <Compile Include="LogicalModels.fs" />
-    <Compile Include="ServiceModelCompiler.fs" />
+    <Compile Include="Models/ServiceModels.fs" />
+    <Compile Include="Models/LogicalModels.fs" />
+    <Compile Include="Generators/LogicalModelGenerator.fs" />
   </ItemGroup>
 </Project>
