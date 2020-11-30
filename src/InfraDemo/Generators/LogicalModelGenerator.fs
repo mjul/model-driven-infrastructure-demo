@@ -6,7 +6,7 @@ module LogicalModelGenerator =
     open InfraDemo.Models.LogicalModels
 
     type Environment = 
-    | Environment of queues:Queue list
+    | Environment of entitites:LogicalEntity list
 
     type CompilerError = | CompileError
 
@@ -31,7 +31,7 @@ module LogicalModelGenerator =
                     (sprintf "service-%s-outbox" nm) |> queueName
 
     let compileEntity entity (env:Environment) : Result<Environment,CompilerError> =
-        let (Environment queues) = env
+        let (Environment es) = env
         match entity with 
         | Service sname ->
             let inboxName = NamingConventions.Queues.serviceInbox sname
@@ -39,8 +39,9 @@ module LogicalModelGenerator =
             let dlqName = NamingConventions.Queues.serviceDlq sname
             let dlq = Queue.Queue dlqName
             let outbox = Queue.Queue(NamingConventions.Queues.serviceOutbox sname)
-            let queues' =  queues @ [inbox;dlq;outbox] 
-            Ok (Environment queues')
+            let fn = Function.Function(inbox, dlq, [], [outbox])
+            let es' = es @ [Queue inbox; Queue dlq; Queue outbox; Function fn] 
+            Ok (Environment es')
 
     let compile (sm:ServiceModel) : Result<LogicalModel,CompilerError> =
         let env0 = Environment (List.empty)
@@ -50,9 +51,7 @@ module LogicalModelGenerator =
             | ServiceModel entities -> 
                 entities |> List.fold (fun envResult entity -> envResult |> Result.bind (compileEntity entity)) state0 
         match envRes with
-        | Ok (Environment queues) ->
-            let qs = queues |> List.map LogicalEntity.Queue 
-            let lm = LogicalModel.createModel qs
-            Ok lm
+        | Ok (Environment entities) ->
+            Ok (LogicalModel.createModel entities)
         | Error e ->
             Error e
