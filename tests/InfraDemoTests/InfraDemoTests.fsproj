@@ -8,6 +8,7 @@
   <ItemGroup>
     <Compile Include="Models\ServiceModelsTests.fs" />
     <Compile Include="Generators\LogicalModelGeneratorTests.fs" />
+    <Compile Include="Generators\ServiceDiagramGeneratorTests.fs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />

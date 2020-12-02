@@ -6,5 +6,6 @@
     <Compile Include="Models/ServiceModels.fs" />
     <Compile Include="Models/LogicalModels.fs" />
     <Compile Include="Generators/LogicalModelGenerator.fs" />
+    <Compile Include="Generators/ServiceDiagramGenerator.fs" />
   </ItemGroup>
 </Project>
