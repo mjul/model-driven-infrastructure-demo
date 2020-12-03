@@ -1,0 +1,15 @@
+source https://api.nuget.org/v3/index.json
+
+storage: none
+framework: netcore3.1, netstandard2.1
+nuget FSharp.Core
+
+
+group Test
+    source https://api.nuget.org/v3/index.json
+    framework: netcore3.1
+
+    nuget coverlet.collector 1.2.0
+    nuget Microsoft.NET.Test.Sdk 16.5.0
+    nuget xunit 2.4.0
+    nuget xunit.runner.visualstudio 2.4.0
