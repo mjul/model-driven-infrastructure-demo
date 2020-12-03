@@ -2,7 +2,6 @@ namespace InfraDemo.Generators
 
 /// Primitives to generate PlantUML diagrams
 module PlantUml = 
-    open InfraDemo.Models.ServiceModels
 
     type Indentation = | Indentation of level:int * indent:int
     /// Starting indentation
