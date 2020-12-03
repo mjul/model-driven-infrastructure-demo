@@ -39,7 +39,10 @@ module LogicalModelGenerator =
             let dlqName = NamingConventions.Queues.serviceDlq sname
             let dlq = Queue.Queue dlqName
             let outbox = Queue.Queue(NamingConventions.Queues.serviceOutbox sname)
-            let fn = Function.Function(inbox, dlq, [], [outbox])
+            let fname = 
+                match sname with 
+                | ServiceName n -> FunctionName n
+            let fn = Function.Function(fname, inbox, dlq, [], [outbox])
             let es' = es @ [Queue inbox; Queue dlq; Queue outbox; Function fn] 
             Ok (Environment es')
 

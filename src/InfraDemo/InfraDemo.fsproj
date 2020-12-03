@@ -6,9 +6,10 @@
   <ItemGroup>
     <Compile Include="Models/ServiceModels.fs" />
     <Compile Include="Models/LogicalModels.fs" />
-    <Compile Include="Generators/LogicalModelGenerator.fs" />
     <Compile Include="Generators/PlantUml.fs" />
     <Compile Include="Generators/ServiceDiagramGenerator.fs" />
+    <Compile Include="Generators/LogicalModelGenerator.fs" />
+    <Compile Include="Generators/LogicalModelDiagramGenerator.fs" />
   </ItemGroup>
   <Import Project="..\..\.paket\Paket.Restore.targets" />
 </Project>

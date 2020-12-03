@@ -41,5 +41,5 @@ module LogicalModelGeneratorTests =
             let actual = LogicalModel.findFunctions lm 
 
             Assert.Equal(1, List.length actual)
-            let expected = Function.Function(Queue.Queue(QueueName "service-foo-inbox"), Queue.Queue(QueueName "service-foo-inbox-dlq"), [], [Queue.Queue(QueueName "service-foo-outbox")])
+            let expected = Function.Function((FunctionName "foo"), Queue.Queue(QueueName "service-foo-inbox"), Queue.Queue(QueueName "service-foo-inbox-dlq"), [], [Queue.Queue(QueueName "service-foo-outbox")])
             Assert.Equal(expected, List.head actual)

@@ -6,7 +6,9 @@ and Queue = Queue of name: QueueName
 
 and Database = | Database
 
-and Function = Function of inbox: Queue * dlq: Queue * databases: Database list * outputs: Queue list
+and FunctionName = FunctionName of string
+
+and Function = Function of name:FunctionName * inbox: Queue * dlq: Queue * databases: Database list * outputs: Queue list
 
 and LogicalEntity =
     | Queue of Queue
