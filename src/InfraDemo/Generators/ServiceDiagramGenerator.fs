@@ -17,11 +17,16 @@ module ServiceDiagramGenerator =
     let writeDiagramTo (writer:System.IO.TextWriter) (sm:ServiceModel) =
         match sm with
         | ServiceModel entities ->
+            let indent0 = PlantUml.noIndent()
             PlantUml.writeStartUml writer "Service Diagram"
-            let indent = (PlantUml.noIndent()) |> PlantUml.indentMore
+            PlantUml.writeFooterWithPageNumbers writer indent0 |> ignore
+            PlantUml.writeTitle writer indent0 "Service Diagram" |> ignore
+
+            let indent = indent0 |> PlantUml.indentMore
             for e in entities do
                 let lines = umlForEntity e
                 PlantUml.writeLines writer indent lines
+
             PlantUml.writeEndUml writer
         ignore()
 
@@ -29,4 +34,3 @@ module ServiceDiagramGenerator =
         use writer : System.IO.StringWriter = new System.IO.StringWriter()
         writeDiagramTo writer sm
         writer.ToString()
-        

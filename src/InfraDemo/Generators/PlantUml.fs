@@ -45,3 +45,27 @@ module PlantUml =
             ""
             "@enduml"
         ]
+
+    /// Write a header for all pages
+    let writeHeader writer indent text = 
+        writeLine writer indent (sprintf "header %s" text)
+
+    /// Write a footer for all pages
+    let writeFooter writer indent text = 
+        writeLine writer indent (sprintf "footer %s" text)
+
+    /// Write a footer with page numbers for all pages
+    let writeFooterWithPageNumbers writer indent  = 
+        writeLine writer indent "footer %page% / %lastpage%"
+
+    /// Write a title for the page
+    let writeTitle writer indent text = 
+        writeLine writer indent (sprintf "title %s" text)
+
+    /// Write a newpage (page break)
+    let writeNewPageWithTitle writer indent title = 
+        writeLine writer indent (sprintf "newpage %s" title)
+
+    /// Write a newpage (page break)
+    let writeNewPage writer indent = 
+        writeNewPageWithTitle writer indent ""

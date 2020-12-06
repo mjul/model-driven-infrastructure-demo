@@ -7,8 +7,12 @@ module LogicalModelDiagramGenerator =
 
     let writeDiagramTo (writer:System.IO.TextWriter) (lm:LogicalModel) =
         PlantUml.writeStartUml writer "Logical Model"
+        let indent0 = PlantUml.noIndent()
+        PlantUml.writeHeader writer indent0 "Logical Model" |> ignore
+        PlantUml.writeTitle writer indent0 "Logical Model" |> ignore
+        PlantUml.writeFooterWithPageNumbers writer indent0 |> ignore
 
-        let indent = (PlantUml.noIndent()) |> PlantUml.indentMore
+        let indent = indent0|> PlantUml.indentMore
         for f in (LogicalModel.findFunctions lm) do
             match f with
             | Function.Function(FunctionName(functionName), 
